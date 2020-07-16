@@ -5,8 +5,7 @@ metadata:
   name: drupal-mysql-service
 spec: 
   ports: 
-    - 
-      name: mysql
+    - name: mysql
       port: 3306
       protocol: TCP
   selector: 
@@ -18,35 +17,33 @@ metadata:
   name: drupal-mysql
 spec: 
   replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: drupal-mysql
   template: 
     metadata: 
       labels: 
         app: drupal-mysql
     spec: 
       containers: 
-        - 
-          env: 
-            - 
-              name: MYSQL_ROOT_PASSWORD
+        - env: 
+            - name: MYSQL_ROOT_PASSWORD
               value: root_password
-            - 
-              name: MYSQL_DATABASE
+            - name: MYSQL_DATABASE
               value: drupal-database
           image: "mysql:5.7"
           name: cont-drupal-mysql
           ports: 
-            - 
-              containerPort: 3306
+            - containerPort: 3306
               name: mysql
               protocol: TCP
           volumeMounts: 
-            - 
-              mountPath: /var/lib/mysql
+            - mountPath: /var/lib/mysql
               name: vol-drupal
               subPath: dbdata
       volumes: 
-        - 
-          name: vol-drupal
+        - name: vol-drupal
           persistentVolumeClaim: 
             claimName: drupal-pvc-mysql
             
