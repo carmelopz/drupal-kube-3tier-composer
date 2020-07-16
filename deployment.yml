@@ -20,7 +20,7 @@ spec:
     requests: 
       storage: 5Gi
       
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Deployment
 metadata: 
   labels: 
@@ -60,7 +60,6 @@ spec:
             name: vol-drupal
             subPath: themes
       volumes:
-        - 
-          name: vol-drupal
+        - name: vol-drupal
           persistentVolumeClaim: 
             claimName: drupal-pvc
