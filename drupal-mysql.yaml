@@ -12,7 +12,7 @@ spec:
   selector: 
     app: drupal-mysql
 --- 
-apiVersion: extensions/v1beta1
+apiVersion: v1
 kind: Deployment
 metadata: 
   name: drupal-mysql
