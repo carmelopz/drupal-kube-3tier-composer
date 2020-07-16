@@ -2,12 +2,10 @@ apiVersion: v1
 kind: Service
 metadata: 
   name: drupal-service
-spec: 
-  ports: 
-    - 
-      name: http
+spec:
+  ports:
+    - name: http
       port: 8080
       protocol: TCP
-  selector: 
+  selector:
     app: drupal
-  type: LoadBalancer
