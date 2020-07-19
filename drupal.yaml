@@ -33,7 +33,7 @@ spec:
         - name: init-sites-volume
           image: drupal:8.9.2-fpm
           command: ['/bin/bash', '-c']
-          args: ['cp -r /var/www/html/ /data/; chown www-data:www-data /data/ -R']
+          args: ['cp -r /var/www/html/. /data; chown www-data:www-data /data/ -R']
           volumeMounts:
           - mountPath: /data
             name: vol-drupal
