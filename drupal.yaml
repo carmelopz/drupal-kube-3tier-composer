@@ -33,7 +33,7 @@ spec:
         - name: init-sites-volume
           image: drupal:8.9.2-fpm
           command: ['/bin/bash', '-c']
-          args: ['cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R']
+          args: ['cp -r /var/www/html/ /data/; chown www-data:www-data /data/ -R']
           volumeMounts:
           - mountPath: /data
             name: vol-drupal
@@ -43,35 +43,15 @@ spec:
           ports: 
             - containerPort: 9000
           volumeMounts:
-          - mountPath: /var/www/html/modules
+          - mountPath: /var/www/html
             name: vol-drupal
-            subPath: modules
-          - mountPath: /var/www/html/profiles
-            name: vol-drupal
-            subPath: profiles
-          - mountPath: /var/www/html/sites
-            name: vol-drupal
-            subPath: sites
-          - mountPath: /var/www/html/themes
-            name: vol-drupal
-            subPath: themes
         - image: nginx:1.19.1
           name: d8-nginx
           ports: 
             - containerPort: 80
           volumeMounts:
-          - mountPath: /var/www/html/modules
+          - mountPath: /var/www/html
             name: vol-drupal
-            subPath: modules
-          - mountPath: /var/www/html/profiles
-            name: vol-drupal
-            subPath: profiles
-          - mountPath: /var/www/html/sites
-            name: vol-drupal
-            subPath: sites
-          - mountPath: /var/www/html/themes
-            name: vol-drupal
-            subPath: themes
       volumes:
         - name: vol-drupal
           persistentVolumeClaim: 
