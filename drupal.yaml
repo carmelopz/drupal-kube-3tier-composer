@@ -45,7 +45,7 @@ spec:
           volumeMounts:
           - mountPath: /var/www/html
             name: vol-drupal
-        - image: nginx:1.19.1
+        - image: carmelopz/nginx-drupal:1.19.1
           name: d8-nginx
           ports: 
             - containerPort: 80
