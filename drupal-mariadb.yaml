@@ -2,48 +2,52 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: drupal-mysql-service
+  name: d8-mariadb
 spec: 
   ports: 
     - name: mysql
       port: 3306
       protocol: TCP
   selector: 
-    app: drupal-mysql
+    app: d8-mariadb
 --- 
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: drupal-mysql
+  name: d8-mariadb
 spec: 
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: drupal-mysql
+      app: d8-mariadb
   template: 
     metadata: 
       labels: 
-        app: drupal-mysql
+        app: d8-mariadb
     spec: 
       containers: 
         - env: 
             - name: MYSQL_ROOT_PASSWORD
-              value: root_password
+              value: drupal8
             - name: MYSQL_DATABASE
-              value: drupal-database
-          image: "mysql:5.7"
-          name: cont-drupal-mysql
+              value: drupal8
+            - name: MYSQL_USER
+              value: drupal8
+            - name: MYSQL_PASSWORD
+              value: drupal8
+          image: "mariadb:10.5.4"
+          name: d8-mariadb
           ports: 
             - containerPort: 3306
               name: mysql
               protocol: TCP
           volumeMounts: 
             - mountPath: /var/lib/mysql
-              name: vol-drupal
+              name: vol-mariadb
               subPath: dbdata
       volumes: 
-        - name: vol-drupal
+        - name: vol-mariadb
           persistentVolumeClaim: 
-            claimName: drupal-pvc-mysql
+            claimName: pvc-mariadb
             

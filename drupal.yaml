@@ -2,44 +2,61 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: drupal-service
+  name: d8-service
 spec: 
   ports: 
     - name: http
       port: 80
       protocol: TCP
   selector: 
-    app: drupal
+    app: d8-app
   type: LoadBalancer
 --- 
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
   labels: 
-    app: drupal
-  name: drupal
+    app: d8-app
+  name: d8-deploy
 spec: 
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: drupal
+      app: d8-app
   template: 
     metadata: 
       labels: 
-        app: drupal
+        app: d8-app
     spec: 
       initContainers:
         - name: init-sites-volume
-          image: drupal:8.6
+          image: drupal:8.9.2-fpm
           command: ['/bin/bash', '-c']
           args: ['cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R']
           volumeMounts:
           - mountPath: /data
             name: vol-drupal
       containers: 
-        - image: drupal:8.6
-          name: drupal
+        - image: drupal:8.9.2-fpm
+          name: d8-php
+          ports: 
+            - containerPort: 9000
+          volumeMounts:
+          - mountPath: /var/www/html/modules
+            name: vol-drupal
+            subPath: modules
+          - mountPath: /var/www/html/profiles
+            name: vol-drupal
+            subPath: profiles
+          - mountPath: /var/www/html/sites
+            name: vol-drupal
+            subPath: sites
+          - mountPath: /var/www/html/themes
+            name: vol-drupal
+            subPath: themes
+        - image: nginx:1.19.1
+          name: d8-nginx
           ports: 
             - containerPort: 80
           volumeMounts:
@@ -58,4 +75,4 @@ spec:
       volumes:
         - name: vol-drupal
           persistentVolumeClaim: 
-            claimName: drupal-pvc
+            claimName: pvc-d8

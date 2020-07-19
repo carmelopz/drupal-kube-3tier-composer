@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
-  name: drupal-pvc
+  name: pvc-d8
 spec: 
   accessModes: 
     - ReadWriteOnce
@@ -13,7 +13,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
-  name: drupal-pvc-mysql
+  name: pvc-mariadb
 spec: 
   accessModes: 
     - ReadWriteOnce
