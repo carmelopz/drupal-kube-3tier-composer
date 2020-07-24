@@ -1,1 +1,1 @@
-# drupal on kube 3-tier containers
+# drupal on kube 3-tier containers & composer
