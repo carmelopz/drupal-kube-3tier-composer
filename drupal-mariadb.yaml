@@ -42,8 +42,8 @@ spec:
         - env: 
             - name: MYSQL_ROOT_PASSWORD
               value: drupal8
-            - name: MYSQL_DATABASE
-              value: drupal8
+            # - name: MYSQL_DATABASE
+            #   value: drupal8
             - name: MYSQL_USER
               value: drupal8
             - name: MYSQL_PASSWORD
