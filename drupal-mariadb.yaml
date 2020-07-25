@@ -41,19 +41,19 @@ spec:
       containers: 
         - env: 
             - name: MYSQL_ROOT_PASSWORD
-              value: drupal8
-            - name: MYSQL_DATABASE
-              value: drupal8
-            - name: MYSQL_USER
-              value: drupal8
-            - name: MYSQL_PASSWORD
-              value: drupal8
+              value: root
+            # - name: MYSQL_DATABASE
+            #   value: drupal8
+            # - name: MYSQL_USER
+            #   value: drupal8
+            # - name: MYSQL_PASSWORD
+            #   value: drupal8
           
           image: mariadb:10.5.4
           name: d8-mariadb
           
-          command: ['/bin/bash', '-c']
-          args: ['mysql -udrupal8 -pdrupal8 < ./docker-entrypoint-initdb/d8-umami-mysqldump.sql']
+          # command: ['/bin/bash', '-c']
+          # args: ['mysql -udrupal8 -pdrupal8 < ./docker-entrypoint-initdb/d8-umami-mysqldump.sql']
           
           ports:
             - containerPort: 3306
