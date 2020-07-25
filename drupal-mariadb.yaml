@@ -30,12 +30,9 @@ spec:
         
         - name: init-sqldump-volume
           image: mariadb:10.5.4
-          
+                  
           command: ['/bin/bash', '-c']
-          args: ['apt update ; apt install -y wget']
-          
-          command: ['/bin/bash', '-c']
-          args: ['wget https://github.com/carmelopz/drupal-kube-3tier-composer/raw/master/database/d8-umami-mysqldump.sql']
+          args: ['apt update && apt install -y wget && wget https://github.com/carmelopz/drupal-kube-3tier-composer/raw/master/database/d8-umami-mysqldump.sql']
           
           volumeMounts:
           - mountPath: /docker-entrypoint-initdb
