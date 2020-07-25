@@ -13,6 +13,17 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
+  name: pvc-sqldump
+spec: 
+  accessModes: 
+    - ReadWriteOnce
+  resources: 
+    requests: 
+      storage: 16Gi      
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
   name: pvc-mariadb
 spec: 
   accessModes: 
