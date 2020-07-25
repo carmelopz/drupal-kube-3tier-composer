@@ -32,7 +32,7 @@ spec:
           image: mariadb:10.5.4
                   
           command: ['/bin/bash', '-c']
-          args: ['apt update && apt install -y wget && cd /data && wget https://github.com/carmelopz/drupal-kube-3tier-composer/raw/master/database/d8-umami-mysqldump.sql']
+          args: ['apt update && apt install -y wget && apt install -y mariadb-client && cd /data && wget https://github.com/carmelopz/drupal-kube-3tier-composer/raw/master/database/d8-umami-mysqldump.sql' && mysql -udrupal8 -pdrupal8 < ./d8-umami-mysqldump.sql ]
           
           volumeMounts:
           - mountPath: /data
@@ -42,8 +42,8 @@ spec:
         - env: 
             - name: MYSQL_ROOT_PASSWORD
               value: drupal8
-            # - name: MYSQL_DATABASE
-            #   value: drupal8
+            - name: MYSQL_DATABASE
+              value: drupal8
             - name: MYSQL_USER
               value: drupal8
             - name: MYSQL_PASSWORD
