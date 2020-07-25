@@ -32,7 +32,7 @@ spec:
           image: mariadb:10.5.4
                   
           command: ['/bin/bash', '-c']
-          args: ['apt update && apt install -y wget && apt install -y mariadb-client && cd /data && wget https://github.com/carmelopz/drupal-kube-3tier-composer/raw/master/database/d8-umami-mysqldump.sql']
+          args: ['apt update && apt install -y wget && cd /data && wget https://github.com/carmelopz/drupal-kube-3tier-composer/raw/master/database/d8-umami-mysqldump.sql']
           
           volumeMounts:
           - mountPath: /data
@@ -41,19 +41,19 @@ spec:
       containers: 
         - env: 
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              value: drupal8
             # - name: MYSQL_DATABASE
             #   value: drupal8
-            # - name: MYSQL_USER
-            #   value: drupal8
-            # - name: MYSQL_PASSWORD
-            #   value: drupal8
+            - name: MYSQL_USER
+              value: drupal8
+            - name: MYSQL_PASSWORD
+              value: drupal8
           
           image: mariadb:10.5.4
           name: d8-mariadb
           
           # command: ['/bin/bash', '-c']
-          # args: ['mysql -udrupal8 -pdrupal8 < ./docker-entrypoint-initdb/d8-umami-mysqldump.sql']
+          # args: ['mysql -udrupal8 -pdrupal8 < ./docker-entrypoint-initdb.d/d8-umami-mysqldump.sql']
           
           ports:
             - containerPort: 3306
@@ -65,7 +65,7 @@ spec:
               name: vol-mariadb
               subPath: dbdata
               
-            - mountPath: /docker-entrypoint-initdb
+            - mountPath: /docker-entrypoint-initdb.d
               name: vol-sqldump
             
       volumes:
