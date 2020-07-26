@@ -82,7 +82,7 @@ WORKDIR ~
 
 RUN git clone https://github.com/carmelopz/drupal-kube-3tier-composer.git
 
-RUN cp -r ~/drupal-kube-3tier-composer.git/src/. /var/www/html
+RUN cp -r ~/drupal-kube-3tier-composer/src/. /var/www/html
 WORKDIR /var/www/html
 RUN chown -R www-data:www-data sites modules themes
 
