@@ -794,7 +794,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # }
 $databases['default']['default'] = array (
   'database' => 'drupal8',
-  'username' => 'drupal8',
+  'username' => 'root',
   'password' => 'drupal8',
   'prefix' => '',
   'host' => 'd8-mariadb',
