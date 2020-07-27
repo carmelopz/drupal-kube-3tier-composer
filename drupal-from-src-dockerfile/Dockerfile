@@ -81,6 +81,7 @@ ENV COMPOSER_MEMORY_LIMIT -1
 RUN git clone https://github.com/carmelopz/drupal-kube-3tier-composer.git ~/clone
 
 RUN cp -r ~/clone/src/. /var/www/html
+RUN rm -fvr ~/clone/src
 WORKDIR /var/www/html
 RUN chown -R www-data:www-data sites modules themes
 
