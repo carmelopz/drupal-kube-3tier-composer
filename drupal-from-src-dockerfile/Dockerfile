@@ -64,7 +64,7 @@ ENV DRUPAL_VERSION 8.9.2
 ENV DRUPAL_MD5 f3f64fbef97831efd1c943f392975f45
 
 RUN apt update
-RUN apt install -y git unzip
+RUN apt install -y git unzip mariadb-client
 
 # Install Composer, Drush
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
@@ -85,6 +85,5 @@ RUN rm -fr ~/clone/src
 WORKDIR /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
-# RUN composer install
 
 
