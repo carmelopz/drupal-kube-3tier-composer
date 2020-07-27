@@ -83,8 +83,8 @@ RUN git clone https://github.com/carmelopz/drupal-kube-3tier-composer.git ~/clon
 RUN cp -r ~/clone/src/. /var/www/html
 RUN rm -fr ~/clone/src
 WORKDIR /var/www/html
-RUN chown -R www-data:www-data sites modules themes
+RUN chown -R www-data:www-data /var/www/html
 
 # RUN composer install
-# WORKDIR /var/www/html/web
+
 
