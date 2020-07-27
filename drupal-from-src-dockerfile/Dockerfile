@@ -78,9 +78,9 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_MEMORY_LIMIT -1
 
-RUN git clone https://github.com/carmelopz/drupal-kube-3tier-composer.git ~
+RUN git clone https://github.com/carmelopz/drupal-kube-3tier-composer.git ~/clone
 
-RUN cp -r ~/drupal-kube-3tier-composer/src/. /var/www/html
+RUN cp -r ~/clone/src/. /var/www/html
 WORKDIR /var/www/html
 RUN chown -R www-data:www-data sites modules themes
 

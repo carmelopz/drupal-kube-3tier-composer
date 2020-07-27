@@ -31,14 +31,14 @@ spec:
     spec: 
       initContainers:
         - name: init-sites-volume
-          image: drupal:8.9.2-fpm
+          image: carmelopz/php-with-drupal-src:7.4-fpm-buster
           command: ['/bin/bash', '-c']
           args: ['cp -r /var/www/html/. /data; chown www-data:www-data /data/ -R']
           volumeMounts:
           - mountPath: /data
             name: vol-drupal
       containers: 
-        - image: drupal:8.9.2-fpm
+        - image: carmelopz/php-with-drupal-src:7.4-fpm-buster
           name: d8-php
           ports: 
             - containerPort: 9000
